@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>hello_react</title>
+	<title>使用jsx创建虚拟DOM</title>
 	<!-- 引入react核心库 -->
 	<script type="text/javascript" src="../js/react.development.js"></script>
 	<!-- 引入react-dom，用于支撑react操作DOM-->
@@ -14,11 +14,20 @@
 	<!-- 准备好一个容器 -->
 	<div id="test"></div>
 
-	<script type="text/babel" > /* 此处必须写成babel */
+	<script type="text/babel" >
 		//1.创建一个虚拟DOM
-		let VDOM = <h1>Hello,React</h1> //此处一定不要加引号，因为不是字符串，是虚拟DOM
+		let VDOM = (
+			<h1 id="atguigu">
+				<span>Hello,React</span>
+			</h1>
+		)
 		//2.让React将虚拟DOM——VDOM转为真实DOM，渲染到页面
-		ReactDOM.render(VDOM,document.getElementById('test')) //这行代码，不是追加的动作，而是替换的动作
+		ReactDOM.render(VDOM,document.getElementById('test'))
+		/* 
+				关于jsx，我们要知道的：
+					1.jsx的出现就是为了让程序员更加方便的创建虚拟DOM
+					2.jsx最终经过babel的编译，变成了最原始的js写法
+		*/
 	</script>
 </body>
 </html>
