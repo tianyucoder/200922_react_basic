@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>jsx的语法规则</title>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom，用于支撑react操作DOM-->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script>
+		<style>
+			.title{
+				background-color: orange;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test"></div>
+
+		<script type="text/babel" >
+			
+			//模拟一些数据
+			const data = 'Hello,React'
+
+			//1.创建虚拟DOM
+			const VDOM = (
+				<div>
+					<h1 style={{color:'white',fontSize:'40px'}} className="title">{data}</h1>
+					<h2>Hello,0922</h2>
+					<input type="text"/>
+					{/*<peiqi>是一头猪</peiqi>*/}
+				</div>
+			)
+			//2.渲染虚拟DOM到页面
+			ReactDOM.render(VDOM,document.getElementById('test'))
+
+			/* 
+					jsx语法规则：
+						1.创建虚拟DOM时，不要写引号；
+						2.标签中要混入js表达式，要是用{}
+						3.标签中样式的类名要用className指定
+						4.标签中的内联样式要用style={{color:'white'}}，注意属性名转为小驼峰
+						5.只能有一个根标签
+						6.标签必须闭合
+						7.关于标签首字母
+								1.若首字母小写，那么React就会去寻找与之同名的html标签
+										若找见，直接转为html同名元素
+										若未找见，报错
+								2.若首字母大写，那么React就会去寻找与之同名的组件
+										若找见，那么就是用组件
+										若未找见，报错
+			
+			*/
+		</script>
+	</body>
+</html>
