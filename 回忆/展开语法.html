@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script type="text/javascript" >
+			/* let arr = [3,4,5,6]
+			console.log(arr)
+			console.log(...arr) //拆包
+
+			function demo(...params){ //打包
+				console.log('我收到的参数为：',params)
+			}
+			demo(1,2,3)
+
+			let arr2 = [1,2,...arr,7,8,9,10] //拆包
+			console.log(arr2) */
+
+			let obj = {name:'圆圆的海峰',age:18,sex:'女'}
+			let obj2 = {xingming:'帅气的超哥',nl:19,xb:'男'}
+			console.log(obj)
+			// console.log(...obj)
+
+			const cloneObj = {...obj,...obj2}
+			const cloneObj2 = {...obj,name:'张岩'}
+
+			console.log(cloneObj2)
+
+		</script>
+	</body>
+</html>
