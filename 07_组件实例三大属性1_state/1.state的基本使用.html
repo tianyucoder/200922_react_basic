@@ -27,11 +27,11 @@
 					return <h1 onClick={this.show}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h1>
 				}
 				//程序员根据业务逻辑自己定义的事件回调
-				/* 
-					show函数是放在哪里的？------ Weather的原型对象上的，供实例使用
-					show函数中的this是谁？ ------- 如果show是通过Weather实例调用的，那么this就是Weather的实例对象
-				*/
 				show() {
+					/* 
+						show函数是放在哪里的？------ Weather的原型对象上的，供实例使用
+						show函数中的this是谁？ ------- 如果show是通过Weather实例调用的，那么this就是Weather的实例对象
+					*/
 					//获取isHot的值
 					console.log('@',this)
 					//取反赋回去
