@@ -40,6 +40,7 @@
 				//重写从父类继承过来的方法
 				speak(){
 					console.log(`我叫${this.name}，我今年${this.age}了，我读${this.grade}年级了`)
+					this.study()
 				}
 				/* 
 					1.study放在了哪里？ ---- Student的原型对象上，供实例使用
@@ -49,6 +50,7 @@
 					console.log('我在很努力的学习',this)
 				}
 			}
+
 			
 		</script>
 	</body>
