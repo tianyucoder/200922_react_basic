@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>函数式组件</title>
+		<title>类式组件</title>
 		<!-- 引入react核心库 -->
 		<script type="text/javascript" src="../js/react.development.js"></script>
 		<!-- 引入react-dom，用于支撑react操作DOM-->
@@ -14,18 +14,24 @@
 		<div id="test"></div>
 
 		<script type="text/babel">
-			//1.定义一个组件(函数式)
-			function Demo(){
-				console.log(this) //此处的this是undefined，因为经过babel翻译，开启了严格模式
-				return <h2>我是用函数定义的组件（适用于【简单组件】的定义）</h2>
+			//1.定义一个组件(类式)
+			class Demo extends React.Component{
+				/* 
+						1.render方法是放在哪里的？ ----- Demo的原型对象上，供实例使用
+						2.render中的this是谁？ ----- Demo的实例对象
+				*/
+				render(){
+					console.log(this) //Demo类的实例对象 <=> Demo组件实例对象 <=> Demo组件对象
+					return <h2>我是用类定义的组件（适用于【复杂组件】的定义）</h2>
+				}
 			}
 			//2.渲染组件到页面
 			ReactDOM.render(<Demo/>,document.getElementById('test'))
 			/* 
 				执行了ReactDOM.render(<Demo/>......后发生了什么？
 					1.React解析组件标签，寻找Demo组件的定义位置
-					2.React发现Demo组件是用函数定义的，随后React去直接调用Demo函数，将返回的虚拟DOM渲染到页面
-			
+					2.React发现Demo组件是用类定义的，React创建了一个Demo的实例对象————d
+					3.通过d去调用到了render方法
 			*/
 		</script>
 	</body>
