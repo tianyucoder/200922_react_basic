@@ -19,22 +19,29 @@
 				//构造器
 				constructor(props){
 					super(props)
-					this.state = {isHot:false} //初始化状态
+					this.state = {isHot:true} //初始化状态
+					//给实例自身追加一个同名的changeWeather方法，这个方法是根据原型上的changeWeather用bind生成的，它this没问题
+					this.changeWeather = this.changeWeather.bind(this)
 				}
 				//必须要写的render
 				render(){
 					// console.log(this)
-					return <h1 onClick={this.show}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h1>
+					return <h1 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h1>
 				}
 				//程序员根据业务逻辑自己定义的事件回调
-				show() {
+				changeWeather() {
 					/* 
 						show函数是放在哪里的？------ Weather的原型对象上的，供实例使用
-						show函数中的this是谁？ ------- 如果show是通过Weather实例调用的，那么this就是Weather的实例对象
+						show函数中的this是谁？ ------- 此时的show函数，是作为点击事件的回调函数，根本就不是通过Weather的实例调用的，
+																					而且类中的方法自动开启了严格模式，所以this是undefined
 					*/
 					//获取isHot的值
 					console.log('@',this)
-					//取反赋回去
+					//严重注意：state不可以直接修改，要用setState去修改，下面这行奏是直接修改
+					//this.state.isHot = true
+
+					const isHot = this.state.isHot
+					this.setState({isHot:!isHot}) //取反赋回去
 				}
 			}
 			//渲染组件到页面

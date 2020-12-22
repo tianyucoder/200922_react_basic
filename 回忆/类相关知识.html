@@ -51,6 +51,31 @@
 				}
 			}
 
+			class Car {
+				//类中能写什么代码？
+				
+				//构造器方法
+				constructor(name,price){
+					this.name = name
+					this.price = price
+				}
+
+				//一般方法
+				run(){
+					console.log('我正在前进')
+				}
+
+				//赋值语句，例如a=1，给实例自身添加一个属性，名为a，值为1
+				a = 1
+				b = function(){
+					console.log('我是b函数')
+				}
+			}
+
+			const c = new Car('阿特兹','30万')
+			console.log(c)
+			c.run()
+			c.b()
 			
 		</script>
 	</body>

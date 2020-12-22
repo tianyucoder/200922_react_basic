@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script type="text/javascript" >
+			function demo(a,b,c){
+				console.log(this)
+			}
+			demo()
+			demo.call(1,10,20,30)
+			demo.apply(2,[10,20,30])
+			const x = demo.bind(3)
+			x()
+		</script>
+	</body>
+</html>
