@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>对props进行限制</title>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom，用于支撑react操作DOM-->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script>
+		<!-- 引入prop-types，用于对标签属性进行限制 -->
+		<script type="text/javascript" src="../js/prop-types.js"></script>
+
+	</head>
+	<body>
+		<div id="test"></div>
+		<div id="test2"></div>
+
+		<script type="text/babel">
+			class Person extends React.Component{
+				state = {}
+
+				static propTypes = {
+					name:PropTypes.string.isRequired,
+					age:PropTypes.number,
+					sex:PropTypes.string
+				}
+				
+				static defaultProps = {
+					age:18
+				}
+				render(){
+					let {name,sex,age} = this.props
+					return (
+						<ul>
+							<li>姓名：{name}</li>
+							<li>性别：{sex}</li>
+							<li>年龄：{age+1}</li>
+						</ul>
+					)
+				}
+			}
+			
+			ReactDOM.render(<Person name="老刘" sex={9}/>,document.getElementById('test'))
+			//模拟一个服务器返回一个人的数据
+			// const p1 = {
+			// 	name:'强哥',
+			// 	sex:'女',
+			// 	age:19
+			// }
+			// ReactDOM.render(<Person {...p1}/>,document.getElementById('test2'))
+
+		</script>
+	</body>
+</html>
