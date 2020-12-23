@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>受控组件收集</title>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom，用于支撑react操作DOM-->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="test"></div>
+
+		<script type="text/babel">
+			/* 
+				受控组件：表单中输入类的DOM，随着用户的输入，将值收集到state中，那么就称为受控组件
+			*/
+			class Login extends React.Component{
+				state = {
+					username:'',
+					password:''
+				}
+				
+				render(){
+					return (
+						<form onSubmit={this.handleLogin}>
+							用户名：<input type="text" onChange={this.saveUsername}/><br/><br/>
+							密码：<input type="password" onChange={this.savePassword}/><br/><br/>
+							<button>登录</button>
+						</form>
+					)
+				}
+
+				//保存用户名到state中
+				saveUsername = (event)=>{
+					this.setState({username:event.target.value}) //setState不会造成无关数据的丢失
+				}
+
+				//保存密码到state中
+				savePassword = (event)=>{
+					this.setState({password:event.target.value})
+				}
+
+				handleLogin = (event)=>{
+					event.preventDefault()
+					const {username,password} = this.state
+					alert(`用户名是${username}，密码是${password}`)
+				}
+			}
+
+			ReactDOM.render(<Login/>,document.getElementById('test'))
+		</script>
+	</body>
+</html>
