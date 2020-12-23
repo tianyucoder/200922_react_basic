@@ -12,23 +12,26 @@
 	</head>
 	<body>
 		<div id="test"></div>
+		<div id="test2"></div>
 
 		<script type="text/babel">
 			//定义一个Weather组件
 			class Weather extends React.Component{
-				//构造器
+				//构造器-----调用几次？------ 1次
 				constructor(props){
+					console.log('constructor')
 					super(props)
 					this.state = {isHot:true} //初始化状态
 					//给实例自身追加一个同名的changeWeather方法，这个方法是根据原型上的changeWeather用bind生成的，它this没问题
 					this.changeWeather = this.changeWeather.bind(this)
 				}
-				//必须要写的render
+				//必须要写的render------调用几次？-----1+n次，n是改变状态的次数
 				render(){
+					console.log('render')
 					// console.log(this)
 					return <h1 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h1>
 				}
-				//程序员根据业务逻辑自己定义的事件回调
+				//程序员根据业务逻辑自己定义的事件回调-----调用几次？----n次，n是点几次
 				changeWeather() {
 					/* 
 						show函数是放在哪里的？------ Weather的原型对象上的，供实例使用
@@ -36,7 +39,7 @@
 																					而且类中的方法自动开启了严格模式，所以this是undefined
 					*/
 					//获取isHot的值
-					console.log('@',this)
+					//console.log('@',this)
 					//严重注意：state不可以直接修改，要用setState去修改，下面这行奏是直接修改
 					//this.state.isHot = true
 
