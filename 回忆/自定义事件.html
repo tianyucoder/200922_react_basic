@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="div" style="background-color: orange; width: 200px; height: 200px;">我是一些内容</div>
+
+		<script type="text/javascript" >
+			const div = document.getElementById('div')
+			//创建一个haha事件
+			const haha = new Event('onClick')
+
+			div.addEventListener('haha',()=>{
+				console.log('你笑了')
+			})
+
+			setTimeout(()=>{
+				div.dispatchEvent(haha)
+			},2000)
+		</script>
+	</body>
+</html>

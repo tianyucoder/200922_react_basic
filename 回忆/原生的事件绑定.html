@@ -5,14 +5,14 @@
 		<title>Document</title>
 	</head>
 	<body>
-		<button id="btn" onclick="show()">点我</button>
+		<button id="btn">点我</button>
 
 		<script type="text/javascript" >
-			//const btn = document.getElementById('btn')
+			const btn = document.getElementById('btn')
 
-			/* btn.onclick = ()=>{
-				alert(1)
-			} */
+			btn.onclick = (event)=>{
+				console.log(event)
+			}
 
 			/* btn.addEventListener('click',()=>{
 				alert(1)
