@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>React生命周期(旧)</title>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/react.development.js"></script>
+		<!-- 引入react-dom，用于支撑react操作DOM-->
+		<script type="text/javascript" src="../js/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/babel.min.js"></script>
+		<style>
+			.a{
+				width: 400px;
+				height: 160px;
+				background-color: orange;
+				padding: 10px;
+			}
+			.b{
+				background-color: gray;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test"></div>
+		
+		<script type="text/babel">
+
+			class Count extends React.Component{
+				//构造器
+				constructor(){
+					console.log('constructor')
+					super()
+					this.state = {count:0}
+				}
+
+				//加按钮的回调
+				add = ()=>{
+					const {count} = this.state
+					this.setState({count:count+1})
+				}
+
+				//卸载按钮的回调
+				death = ()=>{
+					ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+				}
+
+				//强制更新一下
+				must = ()=>{
+					this.forceUpdate()
+				}
+
+				//组件将要挂载
+				componentWillMount(){
+					console.log('componentWillMount')
+				}
+
+				//组件挂载完毕
+				componentDidMount(){
+					console.log('componentDidMount')
+				}
+
+				//组件将要卸载
+				componentWillUnmount(){
+					console.log('componentWillUnmount')
+				}
+
+				//控制组件是否更新（该钩子可以进行组件的优化）
+				shouldComponentUpdate(){
+					console.log('shouldComponentUpdate')
+					return false
+				}
+
+				//组件将要更新
+				componentWillUpdate(){
+					console.log('componentWillUpdate')
+				}
+
+				//组件更新完毕
+				componentDidUpdate(){
+					console.log('componentDidUpdate')
+				}
+
+				render(){
+					console.log('render')
+					return (
+						<div>
+							<h1>当前求和为：{this.state.count}</h1>	
+							<button onClick={this.add}>点我+1</button>
+							<button onClick={this.death}>点我卸载组件</button>
+							<button onClick={this.must}>不加不减，就是强制掉一下render</button>
+						</div>
+					)
+				}
+			}
+
+			class A extends React.Component{
+				state = {carname:'阿特兹'}
+
+				changeCar = ()=>{
+					this.setState({carname:'奔驰c63'})
+				}
+
+				render(){
+					const {carname} = this.state
+					return (
+						<div className="a">
+							<h3>我是A组件，我的车是：{carname}</h3>	
+							<button onClick={this.changeCar}>换车</button>
+							<B carname={carname}/>
+						</div>
+					)
+				}
+			}
+
+			class B extends React.Component{
+				componentWillReceiveProps(){
+					console.log('B----componentWillReceiveProps')
+				}
+				shouldComponentUpdate(){
+					console.log('B-----shouldComponentUpdate')
+					return true
+				}
+				componentWillUpdate(){
+					console.log('B-----componentWillUpdate')
+				}
+				componentDidUpdate(){
+					console.log('B-----componentDidUpdate')
+				}
+				render(){
+					console.log('B------render')
+					return <h3 className="b">我是B组件，我收到父亲给我的车是：{this.props.carname}</h3>
+				}
+			}
+
+			ReactDOM.render(<A x={100}/>,document.getElementById('test'))
+		
+		</script>
+	</body>
+</html>
