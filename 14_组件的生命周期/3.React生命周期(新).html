@@ -25,6 +25,22 @@
 		<div id="test"></div>
 		
 		<script type="text/babel">
+			/* 
+						1. 初始化阶段: 由ReactDOM.render()触发---初次渲染
+										1.	constructor()
+										2.	getDerivedStateFromProps 
+										3.	render()
+										4.	componentDidMount()
+						2. 更新阶段: 由组件内部this.setSate()或父组件重新render触发
+									1.	getDerivedStateFromProps
+									2.	shouldComponentUpdate()
+									3.	render()
+									4.	getSnapshotBeforeUpdate
+									5.	componentDidUpdate()
+						3. 卸载组件: 由ReactDOM.unmountComponentAtNode()触发
+								1.	componentWillUnmount()
+
+			*/
 
 			class Count extends React.Component{
 				//构造器
@@ -41,14 +57,14 @@
 					return {count:props.a}
 				} */
 
-				getSnapshotBeforeUpdate(){
+				/* getSnapshotBeforeUpdate(){
 					console.log('getSnapshotBeforeUpdate')
 					return '老刘是一个好男人'
-				}
+				} */
 
-				componentDidUpdate(prevProps,prevState,snapshotValue){
+				/* componentDidUpdate(prevProps,prevState,snapshotValue){
 					console.log('componentDidUpdate',prevProps,prevState,snapshotValue)
-				}
+				} */
 
 				//加按钮的回调
 				add = ()=>{
