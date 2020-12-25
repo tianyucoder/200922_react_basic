@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>React生命周期(新)</title>
+		<!-- 引入react核心库 -->
+		<script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+		<!-- 引入react-dom，用于支撑react操作DOM-->
+		<script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+		<!-- 引入babel，用于将jsx转为js -->
+		<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+		<style>
+			.a{
+				width: 400px;
+				height: 160px;
+				background-color: orange;
+				padding: 10px;
+			}
+			.b{
+				background-color: gray;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test"></div>
+		
+		<script type="text/babel">
+
+			class Count extends React.Component{
+				//构造器
+				constructor(){
+					console.log('constructor')
+					super()
+					this.state = {count:0}
+				}
+				
+				//从props中获取派生的状态
+				//当组件中的state完全取决于：外部传来的props时，就要用该钩子
+				static getDerivedStateFromProps(props,state){
+					console.log('getDerivedStateFromProps',props,state)
+					return {count:props.a}
+				}
+
+				//加按钮的回调
+				add = ()=>{
+					const {count} = this.state
+					this.setState({count:count+1})
+				}
+
+				//卸载按钮的回调
+				death = ()=>{
+					ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+				}
+
+				//强制更新一下
+				must = ()=>{
+					this.forceUpdate()
+				}
+
+				render(){
+					console.log('render')
+					return (
+						<div>
+							<h1>当前求和为：{this.state.count}</h1>	
+							<button onClick={this.add}>点我+1</button>
+							<button onClick={this.death}>点我卸载组件</button>
+							<button onClick={this.must}>不加不减，就是强制掉一下render</button>
+						</div>
+					)
+				}
+			}
+			
+
+			ReactDOM.render(<Count a={666}/>,document.getElementById('test'))
+		
+		</script>
+	</body>
+</html>

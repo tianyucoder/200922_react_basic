@@ -25,6 +25,21 @@
 		<div id="test"></div>
 		
 		<script type="text/babel">
+		/* 
+			1. 初始化阶段: 由ReactDOM.render()触发---初次渲染
+						1.constructor()
+						2.componentWillMount()
+						3.render()
+						4.componentDidMount()
+			2. 更新阶段: 由组件内部this.setSate()或父组件重新render触发
+						1.shouldComponentUpdate()
+						2.componentWillUpdate()
+						3.render()
+						4.componentDidUpdate()
+			3. 卸载组件: 由ReactDOM.unmountComponentAtNode()触发
+						1.componentWillUnmount()
+
+		*/
 
 			class Count extends React.Component{
 				//构造器
@@ -56,11 +71,17 @@
 				}
 
 				//组件挂载完毕
+				/* 
+					一般做一些初始化的事情：开启定时器、发送ajax请求、订阅消息等等
+				*/
 				componentDidMount(){
 					console.log('componentDidMount')
 				}
 
 				//组件将要卸载
+				/* 
+					一般做一些收尾的事情：关闭定时器、取消订阅消息等等
+				*/
 				componentWillUnmount(){
 					console.log('componentWillUnmount')
 				}
@@ -133,7 +154,7 @@
 				}
 			}
 
-			ReactDOM.render(<A x={100}/>,document.getElementById('test'))
+			ReactDOM.render(<A/>,document.getElementById('test'))
 		
 		</script>
 	</body>
